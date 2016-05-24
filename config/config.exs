@@ -14,6 +14,15 @@ config :kristaks, Kristaks.Endpoint,
   pubsub: [name: Kristaks.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :ex_admin,
+  repo: Kristaks.Repo,
+  module: Kristaks,
+  modules: [
+    Kristaks.ExAdmin.Dashboard,
+    Kristaks.ExAdmin.Hour,
+    Kristaks.ExAdmin.SiteCopy,
+  ]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
@@ -27,3 +36,6 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :xain, :after_callback, {Phoenix.HTML, :raw}
+

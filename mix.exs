@@ -19,6 +19,7 @@ defmodule Kristaks.Mixfile do
   def application do
     [mod: {Kristaks, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
+                    :calendar, :calecto, :phoenix_calendar,
                     :phoenix_ecto, :postgrex]]
   end
 
@@ -32,7 +33,11 @@ defmodule Kristaks.Mixfile do
   defp deps do
     [{:phoenix, "~> 1.1.4"},
      {:postgrex, ">= 0.0.0"},
+     {:ex_admin, "~> 0.7"},
      {:phoenix_ecto, "~> 2.0"},
+     {:phoenix_calendar, "~> 0.1.2"},
+     {:calecto, "~> 0.5.2"},
+     {:calendar, "~> 0.13"},
      {:phoenix_html, "~> 2.4"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},

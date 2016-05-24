@@ -1,5 +1,6 @@
 defmodule Kristaks.Router do
   use Kristaks.Web, :router
+  use ExAdmin.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -19,8 +20,8 @@ defmodule Kristaks.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Kristaks do
-  #   pipe_through :api
-  # end
+  scope "/admin", ExAdmin do
+    pipe_through :browser
+    admin_routes
+  end
 end
