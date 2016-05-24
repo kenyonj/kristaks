@@ -27,6 +27,10 @@ defmodule Kristaks.Endpoint do
     pass: ["*/*"],
     json_decoder: Poison
 
+  plug Plug.Static,
+    at: "/", from: :nested, gzip: false,
+    only: ~w(css fonts images js themes favicon.ico robots.txt)
+
   plug Plug.MethodOverride
   plug Plug.Head
 

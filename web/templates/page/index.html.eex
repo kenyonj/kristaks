@@ -1,36 +1,98 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
+<div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-image">
+        <img src="/images/flavors.jpg">
+      </div>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="http://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
+      <div class="card-header">
+        <span id="flavors-info-title">Flavors <br> (coming soon)</span>
+      </div>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+      <div class="card-copy">
+        <%= if admin?("@current_user") do %>
+          <%= link "Add Flavors", to: "/here" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">
+        <%= link to: "http://maps.google.com/?q=Krista K's+882 Route 28, West Dennis, MA 02670" do %>
+          <img src="/images/kristaks-map.jpeg">
+        <% end %>
+      </div>
+
+      <div class="card-header">
+        <span id="contact-info-title">Contact Information</span>
+      </div>
+
+      <div class="card-copy">
+        <h4>882 Route 28</h4>
+        <h4>West Dennis</h4>
+        <h4>MA 02670</h4>
+      </div>
+
+      <div class="card-stats">
+        <ul>
+          <li>
+            (508) 398-6569
+            <span>Phone</span>
+          </li>
+          <li><%= link "info@kristaks.com", to: "mailto:info@kristaks.com" %><span>Email</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">
+        <img src="/images/kristaks.jpeg">
+      </div>
+
+      <div class="card-header">
+        <span id="current-hours-title">Current Hours</span>
+        <span><%= @hours_header %></span>
+      </div>
+
+      <div class="card-copy">
+        <span class="status">We are currently:</span>
+        <%= if open?(@hours) do %>
+          <span class="status open">OPEN</span>
+        <%= else %>
+          <%= if !in_season? do %>
+            <span class="status closed"><br>CLOSED FOR THE SEASON</span>
+          <%= else %>
+            <span class="status closed">CLOSED</span>
+          <% end %>
+        <% end %>
+
+        if @current_user.admin? do
+        <%= if false do %>
+          <div>
+            link_to "edit hours", edit_store_hours_path(@store)
+          </div>
+        <% end %>
+        <%= if in_season? do %>
+          <table>
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Open</th>
+                <th>Close</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= for hour <- @hours do %>
+                <tr>
+                  <td><%= hour.day %></td>
+                  <td><%= pretty_time(hour.opens_at) %></td>
+                  <td><%= pretty_time(hour.closes_at) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

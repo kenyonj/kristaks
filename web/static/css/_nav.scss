@@ -1,0 +1,133 @@
+$main-color: #FF86B2;
+$gradient-color-top: #56BAEC;
+$gradient-color-bottom: #FFAEAE;
+$gradient-color-left: #B0E57C;
+$gradient-color-right: #FFEC94;
+
+#nav {
+  .image-gradient {
+    $image-gradient-color-top: $gradient-color-top;
+    $transparency-top: .6;
+    $image-gradient-color-bottom: $gradient-color-bottom;
+    $transparency-bottom: .6;
+    $vertical-angle: 80deg;
+
+    $image-gradient-color-left: $gradient-color-left;
+    $transparency-left: .9;
+    $image-gradient-color-right: $gradient-color-right;
+    $transparency-right: .8;
+    $horizontal-angle: 180deg;
+
+    background: url(/images/kristaks-front.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 7em 0 7em 0;
+    position: relative;
+    width: 100%;
+    display: table;
+    // margin-bottom: $base-line-height;
+
+    .copy {
+      position: absolute;
+      left: 50%;
+      margin: auto;
+      z-index: 999;
+      top: 10%;
+      text-align: center;
+
+      p {
+        padding: 1em 2em;
+        position: relative;
+        left: -50%;
+        color: white;
+        font-weight: 800;
+        // background-color: transparentize(black, .6);
+      }
+    }
+
+    .overlay {
+      @include linear-gradient($vertical-angle, transparentize($image-gradient-color-top, $transparency-top),
+        transparentize($image-gradient-color-bottom, $transparency-bottom));
+      display: block;
+      @include position(absolute, 0px 0px 0px 0px);
+
+      &:after {
+        content: '';
+        @include linear-gradient($horizontal-angle, transparentize($image-gradient-color-left, $transparency-left),
+          transparentize($image-gradient-color-right, $transparency-right));
+        display: block;
+        @include position(absolute, 0px 0px 0px 0px);
+      }
+    }
+  }
+
+  @include clearfix;
+  position: relative;
+  z-index: 9999;
+  width: 100%;
+
+  #logo-text {
+    font-family: 'Satisfy', cursive;
+    font-size: $base-font-size;
+    font-weight: 800;
+    margin: 10px auto 0;
+    padding-top: .4em;
+    line-height: 50px;
+    color: $main-color;
+    position: relative;
+    width: 500px;
+    display: block;
+    text-align: center;
+    text-shadow: .2px .2px .2px #000;
+  }
+
+  #logo-subtext {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5em;
+    font-weight: 800;
+    margin: 0 auto 0;
+    padding-top: .4em;
+    color: white;
+    position: relative;
+    display: block;
+    text-align: center;
+    text-shadow: .2px .2px .2px #000;
+  }
+
+  #nav-bar {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    height: 30px;
+    background-color: gray;
+    // border-bottom: 1px solid #e1e3ea;
+    // border-top: 1px solid #e1e3ea;
+    text-align: center;
+
+    ul {
+      li {
+        a {
+          font-weight: 100;
+          color: white;
+          font-size: 20px;
+          display: block;
+          float: left;
+          padding: 5px 10px;
+          line-height: 20px;
+          height: 30px;
+          text-align: center;
+          text-shadow: .2px .2px .2px white;
+
+          &:hover {
+            color: white;
+            background-color: $main-color
+          }
+        }
+      }
+    }
+  }
+}
